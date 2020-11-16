@@ -7,11 +7,11 @@ const App = (props) => {
     useEffect(() => {
         console.log(`render ${count}`);
         document.title = `You clicked ${count} times`;
-    }, [count]);
+    }, []);
 
     useEffect(() => {
         console.log("render name");
-    }, [name]);
+    });
 
     return (
         <div>
