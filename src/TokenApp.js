@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 
 class TokenForm extends Component {
     handleSubmit = event => {
@@ -26,27 +26,18 @@ class TokenForm extends Component {
     }
 }
 
-export default class TokenApp extends Component {
-    state = {
-        token: null
-    }
+const TokenApp = () => {
+    const [token, setToken] = useState(sessionStorage.getItem("token"))
 
-    componentDidMount() {
-        this.setState({ token: sessionStorage.getItem("token") });
-    }
-
-    setToken = token => {
+    useEffect(() => {
         sessionStorage.setItem("token", token);
-        this.setState({ token });
-    }
+    })
 
-    render() {
-        const { token } = this.state;
-        return (
-            <div>
-                <h1>Hello</h1>
-                { token ? token : <TokenForm setToken={this.setToken} />}
-            </div>
-        )
-    }
+    return (
+        <div>
+            <h1>Hello</h1>
+            { token ? token : <TokenForm setToken={setToken} />}
+        </div>
+    )
 }
+export default TokenApp;
