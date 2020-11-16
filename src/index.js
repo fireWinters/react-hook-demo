@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './EmojiGenerator';
 // import App from './TokenApp';
-import App from './TodoList';
+import App from './AppEffect';
+// import App from './TodoList';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
