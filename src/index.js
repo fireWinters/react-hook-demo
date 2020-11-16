@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './EmojiGenerator';
+// import App from './EmojiGenerator';
+import App from './TokenApp';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
