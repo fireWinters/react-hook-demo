@@ -5,7 +5,8 @@ import './index.css';
 // import App from './TokenApp';
 // import App from './AppEffect';
 // import App from './TodoList';
-import App from './UseEffectDemo';
+// import App from './UseEffectDemo';
+import App from './MemoDemo';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
