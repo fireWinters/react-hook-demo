@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 
 const MyAPI = {
     count: 0,
@@ -46,44 +46,50 @@ export default class UseEffectDemo extends Component {
     }
 }
 
-class UseEffectComponent extends Component {
-    state = {
-        timeOnProject: 0,
-    };
+const UseEffectComponent = (props) => {
 
-    componentDidMount() {
+    const [timeOnProject, setTimeOnProject] = useState(0);
+    const { project } = props;
+    useEffect(() => {
         MyAPI.subscribe(timeOnProject => {
-            this.setState({ timeOnProject });
+            setTimeOnProject(timeOnProject);
         });
-    }
-
-    componentDidUpdate(prevProps) {
-        if (this.props.project !== prevProps.project) {
+        return () => {
             MyAPI.unsubscribe();
-            this.setState({ timeOnProject: 0 });
-            MyAPI.subscribe(timeOnProject => {
-                this.setState({ timeOnProject });
-            });
+            setTimeOnProject(0);
         }
-    }
+    }, [project])
+    // componentDidMount() {
+    //     MyAPI.subscribe(timeOnProject => {
+    //         this.setState({ timeOnProject });
+    //     });
+    // }
 
-    componentWillUnmount() {
-        console.log('will unmount');
-        MyAPI.unsubscribe();
-    }
+    // componentDidUpdate(prevProps) {
+    //     if (this.props.project !== prevProps.project) {
+    //         MyAPI.unsubscribe();
+    //         this.setState({ timeOnProject: 0 });
+    //         MyAPI.subscribe(timeOnProject => {
+    //             this.setState({ timeOnProject });
+    //         });
+    //     }
+    // }
 
-    render() {
-        const { project } = this.props;
-        const { timeOnProject } = this.state;
+    // componentWillUnmount() {
+    //     console.log('will unmount');
+    //     MyAPI.unsubscribe();
+    // }
 
-        return (
-            <div>
-                <h1>Project: {project}</h1>
-                <h2>
-                    Time on project: <br />
-                    {timeOnProject}
-                </h2>
-            </div>
-        );
-    }
+
+
+
+    return (
+        <div>
+            <h1>Project: {project}</h1>
+            <h2>
+                Time on project: <br />
+                {timeOnProject}
+            </h2>
+        </div>
+    );
 }
