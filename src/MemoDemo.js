@@ -1,23 +1,25 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Child from './Child';
-class MemoDemo extends Component {
-    state = {
-        time: new Date()
-    }
-    componentDidMount() {
+const MemoDemo = () => {
+    const [time, setTime] = useState(new Date())
+    useEffect(() => {
         setInterval(() => {
-            this.setState({
-                time: new Date()
-            })
-        }, 1000);
-    }
-    render() {
-        return (
-            <div>
-                <Child seconds={1} />
-                {this.state.time.toString()}
-            </div>
-        )
-    }
+            setTime(new Date())
+        }, 1000)
+
+    }, [])
+    // componentDidMount() {
+    //     setInterval(() => {
+    //         this.setState({
+    //             time: new Date()
+    //         })
+    //     }, 1000);
+    // }
+    return (
+        <div>
+            <Child seconds={1} />
+            {time.toString()}
+        </div>
+    )
 }
 export default MemoDemo;
